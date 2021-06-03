@@ -52,16 +52,18 @@ class GitArgs:
     origin: Repo = None
     index: Repo = None
     git_url: str = None
-    git_proto: str = None
+    git_proto: str = None  # http, https or ssh (git@xyz)
     git_port: str = "443"
     git_path: str = "/tmp/git/backups"
     git_server: str = "gitea.example-org.co.uk"
-    git_project: str = "testorg"
+    git_project: str = "example-proj"
     git_repo_name: str = "testrepo"
     git_branch: str = "master"
     git_remote: str = "origin"
-    git_commit_message: str = "This is a config backup commit."
-    git_server_type: str = "gitea"
+    git_commit_message: str = "This is a jimi commit."
+    git_server_type: str = (
+        "gitea"  # http, https or gitea (gitea is http but runs on explicit port 3000)
+    )
 
 
 class GitOps(BaseGitOps):
@@ -74,7 +76,7 @@ class GitOps(BaseGitOps):
 
         self.args = args
 
-        self._generate_url()
+        self._generate_url()  # Generate the git URL
 
     pass
 

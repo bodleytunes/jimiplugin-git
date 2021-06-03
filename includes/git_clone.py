@@ -7,6 +7,7 @@ from git import Repo
 import git
 
 from plugins.git.includes.git_ops import GitOps
+from plugins.git.includes.git_helpers import GitHelper as helper
 
 
 @dataclass
@@ -18,9 +19,8 @@ class CloneArgs:
     git_clone_subpath: str = None
 
 
-class CloneGit(GitOps):
+class CloneGit:
     def __init__(self, args: CloneArgs = None) -> None:
-        super().__init__()  # init superclass
         self.args = args  # pass in args as CloneArgs object
 
         pass
@@ -33,7 +33,7 @@ class CloneGit(GitOps):
             self.args.git_clone_local_path, self.args.git_clone_subpath
         )
         # pre flights and clone
-        if super()._check_local_path(path=self.args.git_clone_local_path):
+        if helper._check_local_path(path=self.args.git_clone_local_path):
             try:
                 # clone
                 self.repo = g.clone_from(url=self.args.git_url, to_path=clone_path)
@@ -44,7 +44,7 @@ class CloneGit(GitOps):
         else:
             try:
                 # create new path
-                super()._create_local_path()
+                helper._create_local_path(self.args.git_clone_local_path)
                 # clone
                 self.repo = g.clone_from(url=self.args.git_url, to_path=clone_path)
                 return self.repo

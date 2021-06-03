@@ -2,13 +2,19 @@ from core import plugin, model
 
 
 class _git(plugin._plugin):
-    version = 0.1
+    version = 0.2
 
     def install(self):
         # Register  Models
         model.registerModel(
             "GitOps",
             "_GitOps",
+            "_action",
+            "plugins.git.models.action",
+        )
+        model.registerModel(
+            "GitClone",
+            "_GitClone",
             "_action",
             "plugins.git.models.action",
         )
@@ -22,6 +28,12 @@ class _git(plugin._plugin):
             "_action",
             "plugins.git.models.action",
         )
+        model.deregisterModel(
+            "GitClone",
+            "_GitClone",
+            "_action",
+            "plugins.git.models.action",
+        )
         return True
 
     def upgrade(self, LatestPluginVersion):
@@ -30,6 +42,13 @@ class _git(plugin._plugin):
             model.registerModel(
                 "GitOps",
                 "_GitOps",
+                "_action",
+                "plugins.git.models.action",
+            )
+        if self.version < 0.2:
+            model.registerModel(
+                "GitClone",
+                "_GitClone",
                 "_action",
                 "plugins.git.models.action",
             )

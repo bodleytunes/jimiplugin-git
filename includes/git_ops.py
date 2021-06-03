@@ -1,14 +1,15 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from typing import Optional
+import os
 
 from git import Repo, RemoteReference
 import git
 
+from plugins.git.includes.git_helpers import GitHelper as helper
+
 
 class BaseGitOps(ABC):
-    pass
-
     @abstractmethod
     def fetch():
         pass
@@ -159,17 +160,6 @@ class GitOps(BaseGitOps):
             print(Exception(f"Cannot pull from repo due to error: {e}"))
             pass
 
-    # create path
-    def _create_local_path(self) -> None:
-        # Create path
-        from pathlib import Path
-
-        return Path(self.args.git_path).mkdir(parents=True, exist_ok=True)
-
-    def _check_local_path(self, path: str) -> bool:
-        # does path exist
-        return os.path.isdir(path)
-
     def _check_repo_exists(self, path: str) -> bool:
         # does repo exist
         return self.repo.repo.exists(path)
@@ -216,7 +206,7 @@ class GitOps(BaseGitOps):
         if git_path is not None:
             self.args.git_path = git_path
         # does path exist?  if not then create it
-        if not self._check_local_path(path=self.args.git_path):
+        if not helper._check_local_path(path=self.args.git_path):
             # create path
-            self._create_local_path()
+            helper._create_local_path(path=self.args.git_path)
         return

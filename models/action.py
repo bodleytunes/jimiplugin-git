@@ -103,7 +103,13 @@ class _GitClone(action._action):
         self._pre_flights(data)
         # do cloning
         # create clone instance
-        git_clone = Clone(args=CloneArgs())
+        git_clone = Clone(
+            args=CloneArgs(
+                git_url=self.git_url,
+                git_clone_local_path=self.git_clone_local_path,
+                git_clone_subpath=self.git_clone_subpath,
+            )
+        )
         # clone repo return git repo instance
         self.repo = git_clone.clone()
 

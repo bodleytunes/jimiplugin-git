@@ -82,7 +82,7 @@ class _GitOps(action._action):
 
         return args
 
-    def setAttribute(self, attr, value, sessionData=None) -> super:
+    def setAttribute(self, attr, value, sessionData=None) -> bool:
         # set parent class session data
         return super(_GitOps, self).setAttribute(attr, value, sessionData=sessionData)
 
@@ -140,7 +140,7 @@ class _GitClone(action._action):
             print(f"{e}")
             return git_path
 
-    def setAttribute(self, attr, value, sessionData=None) -> super:
+    def setAttribute(self, attr, value, sessionData=None) -> bool:
         # set parent class session data
         return super(_GitClone, self).setAttribute(attr, value, sessionData=sessionData)
 

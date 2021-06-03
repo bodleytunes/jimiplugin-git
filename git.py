@@ -1,7 +1,7 @@
 from core import plugin, model
 
 
-class _configbackup(plugin._plugin):
+class _git(plugin._plugin):
     version = 0.1
 
     def install(self):

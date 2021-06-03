@@ -12,6 +12,7 @@ class _configbackup(plugin._plugin):
             "_action",
             "plugins.git.models.action",
         )
+        return True
 
     def uninstall(self):
         # de-register  Models
@@ -21,6 +22,7 @@ class _configbackup(plugin._plugin):
             "_action",
             "plugins.git.models.action",
         )
+        return True
 
     def upgrade(self, LatestPluginVersion):
 
@@ -31,3 +33,4 @@ class _configbackup(plugin._plugin):
                 "_action",
                 "plugins.git.models.action",
             )
+        return True

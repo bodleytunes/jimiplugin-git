@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
+from typing import Optional
 
 from git import Repo, RemoteReference
 import git
@@ -14,6 +15,22 @@ class BaseGitOps(ABC):
 
     @abstractmethod
     def init():
+        pass
+
+    @abstractmethod
+    def files_add():
+        pass
+
+    @abstractmethod
+    def create_index():
+        pass
+
+    @abstractmethod
+    def remote_add():
+        pass
+
+    @abstractmethod
+    def set_remote_reference():
         pass
 
     @abstractmethod

@@ -1,5 +1,4 @@
 from core.models import action
-from core import auth, helpers
 
 from git import Repo
 
@@ -91,10 +90,11 @@ class _GitOps(action._action):
 class _GitClone(action._action):
 
     repo: Repo = None
+
+    git_url: str = "https://github.com/bodleytunes/jimiplugin-batfish.git/"
     # the root of the git path, so the clone should be to a project name as a subpath of this
-    clone_git_path: str = "/tmp/git/backups"
-    clone_url_path: str = "https://github.com/bodleytunes/jimiplugin-batfish.git/"
-    clone_subpath: str = (
+    git_clone_local_path: str = "/tmp/git/backups"
+    git_clone_subpath: str = (
         "jimiplugin-batfish"  # generally this should match the git project name
     )
 
@@ -102,12 +102,11 @@ class _GitClone(action._action):
         # pre flight checks
         self._pre_flights(data)
         # do cloning
-        g = Git(args=GitArgs(git_path=self.clone_git_path), CLONE=True)
-        self.repo = g.clone(
-            local_clone_path=self.clone_git_path,
-            url_path=self.clone_url_path,
-            clone_subpath=self.clone_subpath,
-        )
+        # create clone instance
+        git_clone = Clone(args=CloneArgs())
+        # clone repo return git repo instance
+        self.repo = git_clone.clone()
+
         if self.repo is not None:
             return {
                 "result": True,
@@ -121,13 +120,13 @@ class _GitClone(action._action):
                 "result": False,
                 "rc": 255,
                 "msg": "Clone failed",
-                "data": f"Path exists {self.clone_git_path}",
+                "data": f"Path exists {self.git_clone_local_path}",
                 "errors": "Clone failed",
             }
 
     def _pre_flights(self, data):
-        self.clone_git_path = _helper.set_git_path(
-            git_path=self.clone_git_path, data=data
+        self.git_clone_local_path = _helper.set_git_path(
+            git_path=self.git_clone_local_path, data=data
         )
 
     def _set_git_path(git_path: str, data=None) -> str:
@@ -143,9 +142,7 @@ class _GitClone(action._action):
 
     def setAttribute(self, attr, value, sessionData=None) -> super:
         # set parent class session data
-        return super(_cfgGitClone, self).setAttribute(
-            attr, value, sessionData=sessionData
-        )
+        return super(_GitClone, self).setAttribute(attr, value, sessionData=sessionData)
 
 
 class _helper:

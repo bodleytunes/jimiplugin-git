@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import os
-from typing import Optional, Union
+from typing import Union
 
 
 from git import Repo
@@ -20,8 +20,8 @@ class CloneArgs:
 
 class CloneGit(GitOps):
     def __init__(self, args: CloneArgs = None) -> None:
-        super().__init__()
-        self.args = args
+        super().__init__()  # init superclass
+        self.args = args  # pass in args as CloneArgs object
 
         pass
 
@@ -50,7 +50,7 @@ class CloneGit(GitOps):
                 return self.repo
             except Exception as e:
                 print(f"can't clone repo: {e}")
-                # now git pull instead?
+                # todo: now have an option to git pull instead?
                 return False
 
     def _build_clone_path(

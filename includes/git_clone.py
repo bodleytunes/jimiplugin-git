@@ -20,14 +20,15 @@ class CloneArgs:
 
 
 class CloneGit:
-    def __init__(self, args: CloneArgs = None) -> None:
+    def __init__(self, git_repo: git.Repo, args: CloneArgs = None) -> None:
         self.args = args  # pass in args as CloneArgs object
+        self.git_repo = git_repo
 
         pass
 
     def clone(self) -> Union[git.Repo, bool]:
         # get new repo object
-        g = git.Repo()
+        # g = git.Repo()
         # build full local path to clone to
         clone_path = self._build_clone_path(
             self.args.git_clone_local_path, self.args.git_clone_subpath
@@ -36,7 +37,9 @@ class CloneGit:
         if helper._check_local_path(path=self.args.git_clone_local_path):
             try:
                 # clone
-                self.repo = g.clone_from(url=self.args.git_url, to_path=clone_path)
+                self.repo = self.git_repo.clone_from(
+                    url=self.args.git_url, to_path=clone_path
+                )
                 return self.repo
             except Exception as e:
                 print(f"can't clone repo: {e}")
@@ -46,7 +49,9 @@ class CloneGit:
                 # create new path
                 helper._create_local_path(self.args.git_clone_local_path)
                 # clone
-                self.repo = g.clone_from(url=self.args.git_url, to_path=clone_path)
+                self.repo = self.git_repo.clone_from(
+                    url=self.args.git_url, to_path=clone_path
+                )
                 return self.repo
             except Exception as e:
                 print(f"can't clone repo: {e}")

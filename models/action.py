@@ -101,6 +101,8 @@ class _GitClone(action._action):
     def doAction(self, data):
         # pre flight checks
         self._pre_flights(data)
+        # create instance of git repo
+        git_repo = Repo()
         # do cloning
         # create clone instance
         git_clone = Clone(
@@ -108,7 +110,8 @@ class _GitClone(action._action):
                 git_url=self.git_url,
                 git_clone_local_path=self.git_clone_local_path,
                 git_clone_subpath=self.git_clone_subpath,
-            )
+            ),
+            git_repo=git_repo,
         )
         # clone repo return git repo instance
         self.repo = git_clone.clone()

@@ -27,8 +27,6 @@ class CloneGit:
         pass
 
     def clone(self) -> Union[git.Repo, bool]:
-        # get new repo object
-        # g = git.Repo()
         # build full local path to clone to
         clone_path = self._build_clone_path(
             self.args.git_clone_local_path, self.args.git_clone_subpath

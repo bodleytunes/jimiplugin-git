@@ -6,7 +6,10 @@
         "networking",
         "firewalls",
         "routing",
-        "git"
+        "git",
+        "configuration",
+        "backups",
+        "source control"
     ],
     "description": "Git Repo Operations",
     "icon": null,
@@ -137,6 +140,76 @@
                     "values": {
                         "(string)": {
                             "description": "Repo Operations Complete"
+                        }
+                    }
+                }
+            }
+        },
+        "GitClone": {
+            "display_name": "GitClone",
+            "className": "_GitClone",
+            "class_location": "models.action",
+            "description": "Git single clone operation - clone a remote repo",
+            "fields": [
+                {
+                    "schema_item": "git_url",
+                    "schema_value": "git_url",
+                    "type": "input",
+                    "label": "Git URL",
+                    "description": "Full git URL e.g. https://github.com/jitsi/jitsi-meet.git",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_clone_local_path",
+                    "schema_value": "git_clone_local_path",
+                    "type": "input",
+                    "label": "Git Clone Local Path",
+                    "description": "e.g. /tmp/git/backups",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_clone_subpath",
+                    "schema_value": "git_clone_subpath",
+                    "type": "input",
+                    "label": "Git Clone Subpath",
+                    "description": "Generally this should match the git project name",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+            ],
+            "data_out": {
+                "result": {
+                    "description": "Determines if the given action was successful.",
+                    "type": "boolean",
+                    "always_present": true,
+                    "values": {
+                        "True": {
+                            "description": "Action completed successfully."
+                        },
+                        "False": {
+                            "description": "Action was unsuccessful."
+                        }
+                    }
+                },
+                "rc": {
+                    "description": "Returns the provided rc field value.",
+                    "type": "number",
+                    "always_present": true,
+                    "values": {
+                        "(number)": {
+                            "description": "The integer provided within the rc field."
+                        }
+                    }
+                },
+                "data": {
+                    "description": "Outputs any returned data from the executed process",
+                    "type": "text",
+                    "always_present": false,
+                    "values": {
+                        "(string)": {
+                            "description": "Clone Operations Complete"
                         }
                     }
                 }

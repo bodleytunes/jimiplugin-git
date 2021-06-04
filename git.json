@@ -104,7 +104,7 @@
                     "schema_value": "git_server_type",
                     "type": "input",
                     "label": "Git Server Type",
-                    "description": "http, https or gitea (gitea is http but runs on explicit port 3000)",
+                    "description": "ssh, https or gitea (gitea is http but runs on explicit port 3000).  SSH uses ssh key authentication and starts git@xyx, https starts https://, gitea is http:// on port 3000",
                     "required": true,
                     "jimi_syntax": false
                 }

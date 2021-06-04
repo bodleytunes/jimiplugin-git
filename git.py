@@ -2,7 +2,7 @@ from core import plugin, model
 
 
 class _git(plugin._plugin):
-    version = 0.2
+    version = 0.4
 
     def install(self):
         # Register  Models

@@ -14,8 +14,10 @@ class _GitOps(action._action):
     git_path: str = "/tmp/git/backups"  # local clone path root
     git_server: str = "gitea.company.com"  # git server hostname (or IP)
     git_port: str = "443"
-    git_project: str = "my-project"  # git project name e.g. git@x.y.z/my-project.git
-    git_repo_name: str = "backup-repo"
+    git_project: str = (
+        "my-project"  # "git project name e.g. git@x.y.z/my-project/xyz.git"
+    )
+    git_repo_name: str = "backup-repo"  # "git repo name e.g. git@x.y.z/xyz/my-repo.git"
     git_branch: str = "master"  # default git branch to push to
     git_remote: str = "origin"  # default git remote name
     git_commit_message: str = "Jimi configuration backup commit."

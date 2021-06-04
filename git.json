@@ -59,7 +59,7 @@
                     "schema_value": "git_project",
                     "type": "input",
                     "label": "Git Project Name",
-                    "description": "git project name e.g. git@x.y.z/my-project.git",
+                    "description": "git project name e.g. git@x.y.z/my-project/xyz.git",
                     "required": true,
                     "jimi_syntax": false
                 },
@@ -68,7 +68,7 @@
                     "schema_value": "git_repo_name",
                     "type": "input",
                     "label": "Git Repo name",
-                    "description": "Git Repo Name",
+                    "description": "git repo name e.g. git@x.y.z/xyz/my-repo.git",
                     "required": true,
                     "jimi_syntax": false
                 },

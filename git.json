@@ -177,7 +177,7 @@
                     "description": "Generally this should match the git project name",
                     "required": true,
                     "jimi_syntax": false
-                },
+                }
             ],
             "data_out": {
                 "result": {

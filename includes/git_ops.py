@@ -52,8 +52,8 @@ class GitArgs:
 
     origin: Repo = None
     index: Repo = None
-    git_url: str = None
-    git_proto: str = None  # http, https or ssh (git@xyz)
+    git_url: str = str(None)
+    git_proto: str = str(None)  # http, https or ssh (git@xyz)
     git_port: str = "443"
     git_path: str = "/tmp/git/backups"
     git_server: str = "gitea.example-org.co.uk"

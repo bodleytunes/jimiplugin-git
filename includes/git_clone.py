@@ -14,9 +14,9 @@ from plugins.git.includes.git_helpers import GitHelper as helper
 class CloneArgs:
 
     repo: Repo = None
-    git_url: str = None
-    git_clone_local_path: str = None
-    git_clone_subpath: str = None
+    git_url: str = str(None)
+    git_clone_local_path: str = str(None)
+    git_clone_subpath: str = str(None)
 
 
 class CloneGit:

@@ -29,16 +29,6 @@ class _GitOps(action._action):
 
     def doAction(self, data) -> dict:
 
-        # check event stream to see if git_folder has already been passed in
-        """
-        try:
-            if data["eventData"]["backup_args"]["dst_folder"]:
-                self.git_path = data["eventData"]["backup_args"]["dst_folder"]
-        except Exception as e:
-            print(f"No existing path from eventData: {e}")
-            pass
-        """
-
         # set the git path on the filesystem
         self.git_path = _helper.set_git_path(git_path=self.git_path, data=data)
         # setup git related arguments

@@ -58,8 +58,8 @@
                     "schema_item": "git_project",
                     "schema_value": "git_project",
                     "type": "input",
-                    "label": "Git Project Name",
-                    "description": "git project name e.g. git@x.y.z/my-project/xyz.git",
+                    "label": "Git Project Name/Username",
+                    "description": "git project name e.g. git@x.y.z/my-project/xyz.git or if GitHub, then it would be the username",
                     "required": true,
                     "jimi_syntax": false
                 },

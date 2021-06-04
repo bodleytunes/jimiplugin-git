@@ -77,8 +77,6 @@ class GitOps(BaseGitOps):
 
         self.args = args
 
-        self._generate_url()  # Generate the git URL
-
     pass
 
     def init(self) -> None:
@@ -190,7 +188,7 @@ class GitOps(BaseGitOps):
 
         return str(f"{prefix}@{server}:{project}/{repo}.git")
 
-    def _generate_url(self) -> None:
+    def generate_url(self) -> None:
         # generate url
         if self.args.git_server_type == "https":
             self.args.git_proto = "https"

@@ -29,13 +29,14 @@ class _GitOps(action._action):
 
         # set the git path on the filesystem
         self.git_path = _helper.set_git_path(git_path=self.git_path, data=data)
-        # setup git arguments
+        # setup git related arguments
         args = self._setup_args()
 
         # create instance of Git object
         git = Git(args)
         # run git operations
         try:
+            git.generate_url()
             git.setup_fs_paths()
             git.init()
             git.remote_add()

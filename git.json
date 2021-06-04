@@ -1,0 +1,147 @@
+{
+    "name": "git",
+    "author": "jmc",
+    "version": 1.0,
+    "categories": [
+        "networking",
+        "firewalls",
+        "routing",
+        "git"
+    ],
+    "description": "Git Repo Operations",
+    "icon": null,
+    "requirements": {
+        "jimi_min_version": null,
+        "jimi_max_version": null,
+        "plugins": []
+    },
+    "collections": {},
+    "triggers": {},
+    "actions": {
+        "GitOps": {
+            "display_name": "GitOps",
+            "className": "_GitOps",
+            "class_location": "models.action",
+            "description": "Git Day to Day Operations (init, add, commit, push/pull)",
+            "fields": [
+                {
+                    "schema_item": "git_path",
+                    "schema_value": "git_path",
+                    "type": "input",
+                    "label": "Local clone path root",
+                    "description": "Local filesystem clone path root",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_server",
+                    "schema_value": "git_server",
+                    "type": "input",
+                    "label": "Git Server Host",
+                    "description": "Hostname or IP of Git Server",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_port",
+                    "schema_value": "git_port",
+                    "type": "input",
+                    "label": "Git Port",
+                    "description": "Git Port, only needed if using non standard port. E.g. https will use 443, http 80, gitea 3000",
+                    "required": false,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_project",
+                    "schema_value": "git_project",
+                    "type": "input",
+                    "label": "Git Project Name",
+                    "description": "git project name e.g. git@x.y.z/my-project.git",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_repo_name",
+                    "schema_value": "git_repo_name",
+                    "type": "input",
+                    "label": "Git Repo name",
+                    "description": "Git Repo Name",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_branch",
+                    "schema_value": "git_branch",
+                    "type": "input",
+                    "label": "Git Branch",
+                    "description": "Default git branch to push to e.g. master",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_remote",
+                    "schema_value": "git_remote",
+                    "type": "input",
+                    "label": "Git Remote",
+                    "description": "Remote name, e.g. origin",
+                    "required": true,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_commit_message",
+                    "schema_value": "git_commit_message",
+                    "type": "input",
+                    "label": "Commit Message",
+                    "description": "Git commit message",
+                    "required": false,
+                    "jimi_syntax": false
+                },
+                {
+                    "schema_item": "git_server_type",
+                    "schema_value": "git_server_type",
+                    "type": "input",
+                    "label": "Git Server Type",
+                    "description": "http, https or gitea (gitea is http but runs on explicit port 3000)",
+                    "required": true,
+                    "jimi_syntax": false
+                }
+            ],
+            "data_out": {
+                "result": {
+                    "description": "Determines if the given action was successful.",
+                    "type": "boolean",
+                    "always_present": true,
+                    "values": {
+                        "True": {
+                            "description": "Action completed successfully."
+                        },
+                        "False": {
+                            "description": "Action was unsuccessful."
+                        }
+                    }
+                },
+                "rc": {
+                    "description": "Returns the provided rc field value.",
+                    "type": "number",
+                    "always_present": true,
+                    "values": {
+                        "(number)": {
+                            "description": "The integer provided within the rc field."
+                        }
+                    }
+                },
+                "data": {
+                    "description": "Outputs any returned data from the executed process",
+                    "type": "text",
+                    "always_present": false,
+                    "values": {
+                        "(string)": {
+                            "description": "Repo Operations Complete"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "settings": {}
+}

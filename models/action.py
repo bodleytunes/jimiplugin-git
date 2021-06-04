@@ -29,6 +29,16 @@ class _GitOps(action._action):
 
     def doAction(self, data) -> dict:
 
+        # check event stream to see if git_folder has already been passed in
+        """
+        try:
+            if data["eventData"]["backup_args"]["dst_folder"]:
+                self.git_path = data["eventData"]["backup_args"]["dst_folder"]
+        except Exception as e:
+            print(f"No existing path from eventData: {e}")
+            pass
+        """
+
         # set the git path on the filesystem
         self.git_path = _helper.set_git_path(git_path=self.git_path, data=data)
         # setup git related arguments
@@ -141,17 +151,6 @@ class _GitClone(action._action):
             git_path=self.git_clone_local_path, data=data
         )
 
-    def _set_git_path(git_path: str, data=None) -> str:
-        # set the git path to the previously set destination folder if no explicit git path was passed in
-        try:
-            if data["eventData"]["backup_args"]["dst_folder"] is not None:
-                if git_path is None or git_path == "/tmp/git/backups":
-                    git_path = data["eventData"]["backup_args"]["dst_folder"]
-                    return git_path
-        except Exception as e:
-            print(f"{e}")
-            return git_path
-
     def setAttribute(self, attr, value, sessionData=None) -> bool:
         # set parent class session data
         return super(_GitClone, self).setAttribute(attr, value, sessionData=sessionData)
@@ -166,9 +165,15 @@ class _helper:
         # set the git path to the previously set destination folder if no explicit git path was passed in
         try:
             if data["eventData"]["backup_args"]["dst_folder"] is not None:
-                if git_path is None or git_path == "/tmp/git/backups":
-                    git_path = data["eventData"]["backup_args"]["dst_folder"]
-                    return git_path
+                # change to passed in git local path from upstream flow/plugin
+                git_path = data["eventData"]["backup_args"]["dst_folder"]
+                return git_path
+            elif git_path is None:
+                git_path = "/tmp/git/backups"
+                return git_path
+            else:
+                return git_path
+
         except Exception as e:
             print(f"{e}")
             return git_path
